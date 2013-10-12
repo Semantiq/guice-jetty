@@ -12,7 +12,7 @@ import com.google.inject.servlet._
 object WebApp extends App {
   Guice.createInjector(new ServletModule() {
 	override def configureServlets {
-		serve("/sample").`with`(classOf[SampleServlet])
+		serve("/api/*").`with`(classOf[MyAppServlet])
     }
   }, new AModule())
 
