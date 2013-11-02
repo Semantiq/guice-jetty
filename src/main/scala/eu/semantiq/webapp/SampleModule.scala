@@ -13,5 +13,7 @@ class AModule extends AbstractModule {
 @Singleton
 class MyServlet extends HttpServlet {
   override def doGet(req: HttpServletRequest, resp: HttpServletResponse) {
+    resp.getOutputStream().println("[ \"this came from the server\" ]")
+    resp.flushBuffer()
   }
 }

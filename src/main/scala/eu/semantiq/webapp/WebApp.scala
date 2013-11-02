@@ -21,6 +21,7 @@ object WebApp extends App {
   val context = new ServletContextHandler(server, "/", ServletContextHandler.NO_SESSIONS)
   context.addFilter(classOf[GuiceFilter], "/*", allOf(classOf[DispatcherType]))
   context.addServlet(classOf[DefaultServlet], "/")
+  context.setResourceBase("src/main/resources")
   server.start()
   server.join()
 }

@@ -1,0 +1,13 @@
+<html ng-app>
+	<head>
+		<script src="js/angular.js"></script>
+		<script src="js/demo.js"></script>
+	</head>
+	<body ng-controller="DemoCtrl">
+		<h1>{{caption}}</h1>
+		<ul>
+			<li ng-repeat="item in items">{{item}}</li>
+		</ul>
+		<input type="button" value="refresh" ng-click="refresh()">
+	</body>
+</html>
