@@ -3,10 +3,5 @@ guice-jetty
 
 A sample self contained application with Guice and Jetty
 
-Start with:
-
-sbt run
-
-And browse this URL for demo:
-
-http://localhost:8080/static/index.html
+Start with `sbt run` and browse this URL for demo:
+[http://localhost:8080/static/index.html](http://localhost:8080/static/index.html)
