@@ -6,7 +6,8 @@ object GuiceJettyBuild extends Build {
 	  libraryDependencies ++= Seq(
 	    "com.google.inject" % "guice" % "3.0",
 	    "com.google.inject.extensions" % "guice-servlet" % "3.0",
-	    "org.eclipse.jetty" % "jetty-webapp" % "9.0.6.v20130930"
+	    "org.eclipse.jetty" % "jetty-webapp" % "9.0.6.v20130930",
+	    "commons-io" % "commons-io" % "2.4"    
 	  )
 	)
 	lazy val root = Project(
