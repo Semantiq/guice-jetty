@@ -1,13 +1,27 @@
 <html ng-app>
 	<head>
-		<script src="js/angular.js"></script>
-		<script src="js/demo.js"></script>
+		<title>{{caption}}</title>
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc2/css/bootstrap.min.css" />
 	</head>
-	<body ng-controller="DemoCtrl">
-		<h1>{{caption}}</h1>
-		<ul>
-			<li ng-repeat="item in items">{{item}}</li>
-		</ul>
-		<input type="button" value="refresh" ng-click="refresh()">
+	<body ng-controller="DemoCtrl" class="container">
+		<br />
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="well">
+					<h1>{{caption}}</h1>
+					<ul class="list-group">
+						<li class="list-group-item" ng-repeat="item in items">{{item}}</li>
+					</ul>
+					<div class="form-group">
+						<label>{{addNewTaskMessage}}</label>
+						<input type="text" class="form-control" value="" ng-model="newTask" />
+					</div>
+					<button class="btn btn-primary" ng-click="addTask()">Add task</button>
+				</div>
+			</div>
+		</div>
+		
+		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.5/angular.min.js"></script>
+		<script src="js/demo.js"></script>
 	</body>
 </html>
