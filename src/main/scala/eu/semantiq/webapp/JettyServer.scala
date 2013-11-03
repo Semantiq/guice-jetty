@@ -9,20 +9,14 @@ import com.google.inject.servlet._
 import com.google.inject.servlet.GuiceFilter
 import javax.servlet.DispatcherType
 import org.eclipse.jetty.servlet.DefaultServlet
+import javax.inject.Named
 
-class WebApp(port: Integer = 8080) {
-  val injector = Guice.createInjector(new ServletModule() {
-	override def configureServlets {
-		serve("/api/*").`with`(classOf[MyServlet])
-		serve("/static/*").`with`(classOf[ResourcesServlet])
-    }
-  }, new AModule())
-
+@Singleton
+class JettyServer @Inject() (@Named("port") port: Integer) {
   val server = new Server(port)
   val context = new ServletContextHandler(server, "/", ServletContextHandler.NO_SESSIONS)
   context.addFilter(classOf[GuiceFilter], "/*", allOf(classOf[DispatcherType]))
   context.addServlet(classOf[DefaultServlet], "/")
-  //context.setResourceBase("src/main/resources")
   
   def start = server.start()
   def join = server.join()

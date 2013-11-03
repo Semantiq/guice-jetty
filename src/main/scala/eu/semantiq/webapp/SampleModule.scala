@@ -3,11 +3,14 @@ package eu.semantiq.webapp
 import javax.servlet.http._
 import com.google.inject._
 import org.apache.commons.io.IOUtils
+import com.google.inject.name.Names
 
 class AModule extends AbstractModule {
   def configure {
     bind(classOf[MyServlet])
     bind(classOf[ResourcesServlet])
+    bind(classOf[JettyServer])
+    bind(classOf[Integer]).annotatedWith(Names.named("port")).toInstance(8080)
   }
 }
 
