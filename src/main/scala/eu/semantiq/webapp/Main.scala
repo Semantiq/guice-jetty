@@ -8,6 +8,7 @@ object Main extends App {
 	override def configureServlets {
 		serve("/api/*").`with`(classOf[MyServlet])
 		serve("/static/*").`with`(classOf[ResourcesServlet])
+		serve("/*").`with`(classOf[HomePageServlet])
     }
   }, new AModule())
   

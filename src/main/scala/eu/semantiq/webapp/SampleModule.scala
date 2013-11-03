@@ -1,9 +1,14 @@
 package eu.semantiq.webapp
 
-import javax.servlet.http._
-import com.google.inject._
 import org.apache.commons.io.IOUtils
+import org.json4s.jvalue2extractable
+import com.google.inject.AbstractModule
+import com.google.inject.Singleton
 import com.google.inject.name.Names
+import javax.servlet.http.HttpServlet
+import javax.servlet.http.HttpServletRequest
+import javax.servlet.http.HttpServletResponse
+import org.scalatra.ScalatraServlet
 
 class AModule extends AbstractModule {
   def configure {
@@ -14,11 +19,28 @@ class AModule extends AbstractModule {
   }
 }
 
+case class TODOList(todos: Seq[String])
+case class AddTaskRequest(task: String)
+
 @Singleton
-class MyServlet extends HttpServlet {
-  override def doGet(req: HttpServletRequest, resp: HttpServletResponse) {
-    resp.getOutputStream().println("[ \"this came from the server\" ]")
-    resp.flushBuffer()
+class MyServlet extends ApiServlet {
+  var todos = Seq("Go shopping")
+
+  get("/tasks") {
+    TODOList(todos)
+  }
+
+  post("/tasks") {
+    val task = parsedBody.extract[AddTaskRequest]
+    todos :+= task.task
+    TODOList(todos)
+  }
+}
+
+@Singleton
+class HomePageServlet extends ScalatraServlet {
+  get("/") {
+    redirect("/static/index.html")
   }
 }
 
@@ -33,7 +55,7 @@ class ResourcesServlet extends HttpServlet {
     response.flushBuffer
   }
 
-  private def isStaticResource(uri: String) = if (uri startsWith "/static/") Some(uri) else None 
+  private def isStaticResource(uri: String) = if (uri startsWith "/static/") Some(uri) else None
   private def loadResource(uri: String) = Option(getClass.getResourceAsStream(uri))
   private def fileNotFound(response: HttpServletResponse) {
     response.setStatus(404)
