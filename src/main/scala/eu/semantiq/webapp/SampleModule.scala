@@ -8,7 +8,8 @@ import com.google.inject.name.Names
 import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
-import org.scalatra.ScalatraServlet
+import org.scalatra._
+import org.scalatra.scalate._
 
 class AModule extends AbstractModule {
   def configure {
@@ -38,9 +39,10 @@ class MyServlet extends ApiServlet {
 }
 
 @Singleton
-class HomePageServlet extends ScalatraServlet {
+class HomePageServlet extends ScalatraServlet with ScalateSupport {
   get("/") {
-    redirect("/static/index.html")
+    contentType = "text/html"
+    ssp("/layouts/index.ssp")
   }
 }
 

@@ -17,7 +17,7 @@ class JettyServer @Inject() (@Named("port") port: Integer) {
   val context = new ServletContextHandler(server, "/", ServletContextHandler.NO_SESSIONS)
   context.addFilter(classOf[GuiceFilter], "/*", allOf(classOf[DispatcherType]))
   context.addServlet(classOf[DefaultServlet], "/")
-  
+  context.setResourceBase("src/main/webapp")
   def start = server.start()
   def join = server.join()
   def stop = server.stop()
