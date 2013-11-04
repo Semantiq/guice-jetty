@@ -10,4 +10,4 @@ Press enter to go back to SBT.
 Technologies included:
 - [Google Guice](https://code.google.com/p/google-guice) - Dependency injection
 - [Jetty](http://eclipse.org/jetty) - HTTP server
-- [Salat](https://github.com/novus/salat) - JSON <-> case class object mapper, that is designed to use with [MongoDB](http://www.mongodb.org/)
+- [Scalatra](http://www.scalatra.org/) -  Web micro-framework
